@@ -1,6 +1,6 @@
-from machine import Pin, SPI
-from sys import implementation
-from os import uname
+# from machine import Pin, SPI
+# from sys import implementation
+# from os import uname
 from random import randint
 # import ili9341
 from ili9341 import Display, color565
@@ -9,13 +9,21 @@ import mySetupX
 
 
 class button:
-    def __init__(self, x, y, w, h, colour=None, region=None) -> None:
+    def __init__(self, x, y, w, h, text=None, font_colour=None, colour=None, region=None) -> None:
         self.x = x
         self.y = y
         self.w = w
         self.h = h
+        self.text = text
+        self.font_colour = font_colour
         self.region = region
         self.colour = colour
+        self.font = XglcdFont("Unispace12x24.c", 12, 24)
+        if self.text is not None:
+            if self.h < 24:
+                raise ValueError("Button not tall enough for text")
+            if self.w < 12 * len(self.text):
+                raise ValueError("Button not wide enough for text")
         if colour is None:
             self.colour = color565(0, 255, 0)
         if region is None:
@@ -29,6 +37,10 @@ class button:
 
     def draw(self):
         display.fill_hrect(self.x, self.y, self.w, self.h, self.colour)
+        if self.text is not None:
+            text_x = (self.w - 12 * len(self.text)) // 2 + self.x
+            text_y = (self.h - 24) // 2 + self.y
+            display.draw_text(text_x, text_y, self.text, self.font, color=self.font_colour, background=self.colour)
     
     def is_in_region(self, x, y):
         x_min = self.region["x_min"]
@@ -48,13 +60,14 @@ def button_checker(x, y):
     [btn.run(btn.x, btn.y) for btn in buttons if btn.is_in_region(x, y)]
 
 
-display = mySetupX.createMyDisplay()
-display.clear()
-xptTouch = mySetupX.createXPT(button_checker)
-buttons = [button(8, (8+50) * i +8, 100, 50) for i in range(4)]
+if __name__ == "__main__":
+    display = mySetupX.createMyDisplay()
+    display.clear()
+    xptTouch = mySetupX.createXPT(button_checker)
+    buttons = [button(8, (8+50) * i +8, 200, 50, text=f"btn {i}", font_colour=color565(0, 0, 0)) for i in range(4)]
 
-while True:
-    try:
-        pass
-    except KeyboardInterrupt:
-        print("shutting down...")
+    while True:
+        try:
+            pass
+        except KeyboardInterrupt:
+            print("shutting down...")
