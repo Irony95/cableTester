@@ -9,7 +9,8 @@ import mySetupX
 
 
 class button:
-    def __init__(self, x, y, w, h, text=None, font_colour=None, colour=None, region=None) -> None:
+    def __init__(self, display, x, y, w, h, text=None, font_colour=None, colour=None, region=None, task=None, task_args=()) -> None:
+        self.display = display
         self.x = x
         self.y = y
         self.w = w
@@ -19,6 +20,9 @@ class button:
         self.region = region
         self.colour = colour
         self.font = XglcdFont("Unispace12x24.c", 12, 24)
+        self.task = task
+        self.task_args = task_args
+
         if self.text is not None:
             if self.h < 24:
                 raise ValueError("Button not tall enough for text")
@@ -33,14 +37,13 @@ class button:
                 "y_min": y,
                 "y_max": y + h
             }
-        self.draw()
 
     def draw(self):
-        display.fill_hrect(self.x, self.y, self.w, self.h, self.colour)
+        self.display.fill_hrect(self.x, self.y, self.w, self.h, self.colour)
         if self.text is not None:
             text_x = (self.w - 12 * len(self.text)) // 2 + self.x
             text_y = (self.h - 24) // 2 + self.y
-            display.draw_text(text_x, text_y, self.text, self.font, color=self.font_colour, background=self.colour)
+            self.display.draw_text(text_x, text_y, self.text, self.font, color=self.font_colour, background=self.colour)
     
     def is_in_region(self, x, y):
         x_min = self.region["x_min"]
@@ -50,9 +53,10 @@ class button:
         return (x_min <= x <= x_max) and (y_min <= y <= y_max)
 
     def run(self, x, y):
-       self.colour = color565(randint(0, 255), randint(0, 255), randint(0, 255))
        self.draw()
        print(f"hello! I am button ({x},{y})")
+       if self.task is not None:
+           return self.task(*self.task_args)
 
 
 def button_checker(x, y):
@@ -64,7 +68,7 @@ if __name__ == "__main__":
     display = mySetupX.createMyDisplay()
     display.clear()
     xptTouch = mySetupX.createXPT(button_checker)
-    buttons = [button(8, (8+50) * i +8, 200, 50, text=f"btn {i}", font_colour=color565(0, 0, 0)) for i in range(4)]
+    buttons = [button(display, 8, 58 * i + 8, 200, 50, text=f"btn {i}", font_colour=color565(0, 0, 0)) for i in range(4)]
 
     while True:
         try:

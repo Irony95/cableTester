@@ -21,9 +21,12 @@ def error(msg):
 def write_bin(f, pixel_list):
     """Save image in RGB565 format."""
     for pix in pixel_list:
-        r = (pix[0] >> 3) & 0x1F
+        # r = (pix[0] >> 3) & 0x1F
+        # g = (pix[1] >> 2) & 0x3F
+        # b = (pix[2] >> 3) & 0x1F
+        r = (pix[2] >> 3) & 0x1F
         g = (pix[1] >> 2) & 0x3F
-        b = (pix[2] >> 3) & 0x1F
+        b = (pix[0] >> 3) & 0x1F
         f.write(pack('>H', (r << 11) + (g << 5) + b))
 
 

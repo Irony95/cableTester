@@ -9,12 +9,12 @@ import mySetupX
 import time
 
 
-
 if __name__ == "__main__":
     display = mySetupX.createMyDisplay()
     display.clear()
+    img_width = 240
     i=0
     while True:
-        display.draw_image("nyan_cat.raw", x=i % 320, w=240)
-        # time.sleep(0.2)
+        img_x = i % img_width
+        display.draw_image("nyan_cat.raw", x=img_x, w=img_width)
         i += 1
