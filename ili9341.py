@@ -363,6 +363,7 @@ class Display(object):
         y2 = y + h - 1
         if self.is_off_grid(x, y, x2, y2):
             return
+    
         with open(path, "rb") as f:
             chunk_height = 1024 // w
             chunk_count, remainder = divmod(h, chunk_height)
