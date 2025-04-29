@@ -56,7 +56,7 @@ class button:
        self.draw()
        print(f"hello! I am button ({x},{y})")
        if self.task is not None:
-           return self.task(*self.task_args)
+           return self.task(self.display, *self.task_args)
 
 
 def button_checker(x, y):
