@@ -1,25 +1,119 @@
 from machine import Pin
+from xglcd_font import XglcdFont
 
-config = {
-    "pin_in_map": { # read value
-        0: Pin(16, Pin.IN),
-        1: Pin(17, Pin.IN),
-        2: Pin(18, Pin.IN),
-        3: Pin(19, Pin.IN),
-        4: Pin(20, Pin.IN),
-        5: Pin(21, Pin.IN),
-        6: Pin(22, Pin.IN),
-        7: Pin(26, Pin.IN)
-    },
 
-    "pin_out_map": { # set value
-        0: Pin(27, Pin.OUT),
-        1: Pin(28, Pin.OUT),
-        2: Pin(1, Pin.OUT),
-        3: Pin(2, Pin.OUT),
-        4: Pin(3, Pin.OUT),
-        5: Pin(4, Pin.OUT),
-        6: Pin(5, Pin.OUT),
-        7: Pin(9, Pin.OUT)
-    }    
+FONT = XglcdFont("Unispace12x24.c", 12, 24)
+PIN_IN_MAP = {  # read value
+    0: Pin(16, Pin.IN),
+    1: Pin(17, Pin.IN),
+    2: Pin(18, Pin.IN),
+    3: Pin(19, Pin.IN),
+    4: Pin(20, Pin.IN),
+    5: Pin(21, Pin.IN),
+    6: Pin(22, Pin.IN),
+    7: Pin(26, Pin.IN),
 }
+PIN_OUT_MAP = {  # set value
+    0: Pin(27, Pin.OUT),
+    1: Pin(28, Pin.OUT),
+    2: Pin(1, Pin.OUT),
+    3: Pin(2, Pin.OUT),
+    4: Pin(3, Pin.OUT),
+    5: Pin(4, Pin.OUT),
+    6: Pin(5, Pin.OUT),
+    7: Pin(9, Pin.OUT),
+}
+TEST_PROFILES = [
+    {
+        "label": "BB > ETH",
+        "out_to_in_pin_map": {  # out : in
+            0: (0,),
+            1: (1,),
+            2: (),
+            3: (),
+            4: (),
+            5: (5,),
+            6: (),
+            7: (),
+        },
+        "cable_pin_map": {
+            0: (("G",), ("1",)),
+            1: (("H",), ("2",)),
+            2: (),
+            3: (),
+            4: (),
+            5: (("R",), ("6",)),
+            6: (),
+            7: (),
+        },
+    },
+    {
+        "label": "ETH > SERVER",
+        "out_to_in_pin_map": {  # out : in
+            0: (0,),
+            1: (1,),
+            2: (2,),
+            3: (3,),
+            4: (4,),
+            5: (5,),
+            6: (6,),
+            7: (7,),
+        },
+        "cable_pin_map": {
+            0: (("1",), ("8",)),
+            1: (("2",), ("2",)),
+            2: (("3",), ("3",)),
+            3: (("4",), ("1",)),
+            4: (("5",), ("5",)),
+            5: (("6",), ("4",)),
+            6: (("7",), ("9",)),
+            7: (("8",), ("7",)),
+        },
+    },
+    {
+        "label": "ETH > DATA",
+        "out_to_in_pin_map": {  # out : in
+            0: (0,),
+            1: (1, 4, 5, 7),
+            2: (2,),
+            3: (3,),
+            4: (1, 4, 5, 7),
+            5: (1, 4, 5, 7),
+            6: (6,),
+            7: (1, 4, 5, 7),
+        },
+        "cable_pin_map": {
+            0: (("1",), ("D")),
+            1: (("2",), ("M", "N", "H")),
+            2: (("3",), ("C",)),
+            3: (("4",), ("J",)),
+            4: (("5",), ("M", "N", "H")),
+            5: (("6",), ("M", "N", "H")),
+            6: (("7",), ("R",)),
+            7: (("8",), ("M", "N", "H")),
+        },
+    },
+    {
+        "label": "BB > TEM",
+        "out_to_in_pin_map": {  # out : in
+            0: (0,),
+            1: (1,),
+            2: (2,),
+            3: (3,),
+            4: (4,),
+            5: (5,),
+            6: (6,),
+            7: (7,),
+        },
+        "cable_pin_map": {
+            0: (("L",), ("E",)),
+            1: (("M",), ("F",)),
+            2: (("D",), ("G",)),
+            3: (("E",), ("H",)),
+            4: (("J",), ("J",)),
+            5: (("K",), ("K",)),
+            6: (("U",), ("L",)),
+            7: (("V",), ("M",)),
+        },
+    },
+]
