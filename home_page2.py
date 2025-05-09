@@ -11,22 +11,23 @@ BUTTONS = [
         76 * row + 48,
         156,
         68,
-        text=TEST_PROFILES[row * 2 + col]["label"],
+        text=TEST_PROFILES[row * 2 + col + 4]["label"],
         task="result_page",
-        task_args=(TEST_PROFILES[row * 2 + col],),
+        task_args=(TEST_PROFILES[row * 2 + col + 4],),
     )
     for row in range(2)
     for col in range(2)
+    if row * 2 + col + 4 < len(TEST_PROFILES)
 ]
 BUTTONS.extend(
     [
         button(
-            193,
+            29,
             200,
             98,
             40,
-            text=">>>",
-            task="home_page2",
+            text="<<<",
+            task="home_page",
             colour=color565(197, 122, 175),
         ),
     ]

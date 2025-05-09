@@ -39,7 +39,7 @@ if __name__ == "__main__":
     polling_rate = int(1 / sleep_duration)
 
     xptTouch = mySetupX.createXPT(button_checker)
-    
+
     while True:
         try:
             if not lock and is_first_run:
@@ -51,7 +51,6 @@ if __name__ == "__main__":
             if refresh and not is_first_run:
                 for i in range(polling_rate * 3):
                     if refresh and not is_first_run:
-                        print(i, sleep_duration_ms, "ms")
                         sleep_ms(sleep_duration_ms)
                     else:
                         print("break")

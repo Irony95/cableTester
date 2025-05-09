@@ -8,15 +8,18 @@ REFRESH = True
 TEST_PROFILE = None
 ARGS = (TEST_PROFILE,)
 BUTTONS = [
-    button(0, 200, 156, 40, text="Back", task="home_page"),
     button(
-        164,
+        29, 200, 98, 40, text="Back", task="home_page", colour=color565(197, 122, 175)
+    ),
+    button(
+        193,
         200,
-        156,
+        98,
         40,
         text="Details",
         task="details_page",
         task_args=(),
+        colour=color565(197, 122, 175),
     ),
 ]
 
@@ -26,7 +29,6 @@ def main(display: Display, test_profile: dict):
     TITLE = TEST_PROFILE["label"]
     out_to_in_pin_map = TEST_PROFILE["out_to_in_pin_map"]
 
-    # display.clear()
     draw_header(
         display, TITLE, color565(0, 255, 0), color565(0, 0, 0), color565(0, 255, 0)
     )

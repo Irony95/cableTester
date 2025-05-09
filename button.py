@@ -44,8 +44,8 @@ class button:
     def draw(self, display):
         display.fill_hrect(self.x, self.y, self.w, self.h, self.colour)
         if self.text is not None:
-            text_x = (self.w - 12 * len(self.text)) // 2 + self.x
-            text_y = (self.h - 24) // 2 + self.y
+            text_x = round((self.w - 12 * len(self.text)) / 2 + self.x)
+            text_y = round((self.h - 24) / 2 + self.y)
             display.draw_text(
                 text_x,
                 text_y,

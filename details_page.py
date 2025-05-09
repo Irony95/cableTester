@@ -4,13 +4,14 @@ from tools import FONT, draw_header
 
 BUTTONS = [
     button(
-        0,
+        29,
         200,
-        156,
+        98,
         40,
         text="Back",
         task="result_page",
         task_args=(),
+        colour=color565(197, 122, 175),
     )
 ]
 icons = {True: "tick24x24.raw", False: "cross24x24.raw"}
@@ -21,7 +22,6 @@ def main(display: Display, test_profile: dict, results):
     cable_pin_map = test_profile["cable_pin_map"]
     BUTTONS[0].task_args = (test_profile,)
 
-    # display.clear()
     draw_header(
         display, TITLE, color565(0, 255, 0), color565(0, 0, 0), color565(0, 255, 0)
     )
