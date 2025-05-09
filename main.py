@@ -1,5 +1,5 @@
 import mySetupX
-from time import sleep
+from time import sleep_ms
 import sys
 
 
@@ -11,31 +11,56 @@ if __name__ == "__main__":
     from pages import pages
 
     def button_checker(x, y):
-        global display
-        global page
-        global refresh
-        global args
-        for btn in pages[page].BUTTONS:
-            if btn.is_in_region(x, y):
-                task, args = btn.run(x, y)
-                args = args
-                if task is not None:
-                    page = task
-                    page_obj = pages[page]
-                    refresh = getattr(page_obj, "REFRESH", False)
-                    return pages[page].main(display, *args)
+        global lock
+        if not lock:
+            global display
+            global page
+            global refresh
+            global args
+            global is_first_run
+            for btn in pages[page].BUTTONS:
+                if btn.is_in_region(x, y):
+                    task, args = btn.run(x, y)
+                    args = args
+                    if task is not None:
+                        page = task
+                        page_obj = pages[page]
+                        refresh = getattr(page_obj, "REFRESH", False)
+                        is_first_run = True
+
+    page = "home_page"
+    args = ()
+    refresh = False
+    lock = False
+    is_first_run = True
+
+    sleep_duration = 0.2
+    sleep_duration_ms = int(sleep_duration * 1000)
+    polling_rate = int(1 / sleep_duration)
 
     xptTouch = mySetupX.createXPT(button_checker)
-    page = "home_page"
-    refresh = False
-    args = ()
-    pages[page].main(display, *args)
-
+    
     while True:
         try:
-            if refresh:
-                sleep(3)
+            if not lock and is_first_run:
+                lock = True
+                display.clear()
                 pages[page].main(display, *args)
+                is_first_run = False
+                lock = False
+            if refresh and not is_first_run:
+                for i in range(polling_rate * 3):
+                    if refresh and not is_first_run:
+                        print(i, sleep_duration_ms, "ms")
+                        sleep_ms(sleep_duration_ms)
+                    else:
+                        print("break")
+                        break
+                else:
+                    if refresh and not is_first_run:
+                        lock = True
+                        pages[page].main(display, *args)
+                        lock = False
         except KeyboardInterrupt:
             print("shutting down...")
             sys.exit(0)

@@ -1,8 +1,6 @@
 from button import button
 from ili9341 import Display, color565
-from tools import draw_header
-from tools import FONT
-
+from tools import FONT, draw_header
 
 BUTTONS = [
     button(
@@ -23,7 +21,7 @@ def main(display: Display, test_profile: dict, results):
     cable_pin_map = test_profile["cable_pin_map"]
     BUTTONS[0].task_args = (test_profile,)
 
-    display.clear()
+    # display.clear()
     draw_header(
         display, TITLE, color565(0, 255, 0), color565(0, 0, 0), color565(0, 255, 0)
     )

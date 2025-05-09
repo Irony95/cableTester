@@ -26,7 +26,7 @@ def main(display: Display, test_profile: dict):
     TITLE = TEST_PROFILE["label"]
     out_to_in_pin_map = TEST_PROFILE["out_to_in_pin_map"]
 
-    display.clear()
+    # display.clear()
     draw_header(
         display, TITLE, color565(0, 255, 0), color565(0, 0, 0), color565(0, 255, 0)
     )

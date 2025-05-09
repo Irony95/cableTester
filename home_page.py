@@ -21,7 +21,7 @@ BUTTONS = [
 
 
 def main(display: Display):
-    display.clear()
+    # display.clear()
     draw_header(
         display, TITLE, color565(0, 255, 0), color565(0, 0, 0), color565(0, 255, 0)
     )
