@@ -1,6 +1,7 @@
 from ili9341 import color565
 import mySetupX
 from config import FONT
+from tools import fill_super_ellipse
 
 
 class button:
@@ -42,7 +43,7 @@ class button:
             self.region = {"x_min": x, "x_max": x + w, "y_min": y, "y_max": y + h}
 
     def draw(self, display):
-        display.fill_hrect(self.x, self.y, self.w, self.h, self.colour)
+        fill_super_ellipse(display, self.x, self.y, self.w, self.h, self.colour)
         if self.text is not None:
             text_x = round((self.w - 12 * len(self.text)) / 2 + self.x)
             text_y = round((self.h - 24) / 2 + self.y)
