@@ -53,7 +53,6 @@ if __name__ == "__main__":
                     if refresh and not is_first_run:
                         sleep_ms(sleep_duration_ms)
                     else:
-                        print("break")
                         break
                 else:
                     if refresh and not is_first_run:
