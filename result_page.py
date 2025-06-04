@@ -9,7 +9,13 @@ TEST_PROFILE = None
 ARGS = (TEST_PROFILE,)
 BUTTONS = [
     button(
-        29, 200, 98, 40, text="Back", task="home_page", colour=color565(197, 122, 175)
+        29,
+        200,
+        98,
+        40,
+        text="Back",
+        task="home_page",
+        colour=color565(255, 255, 255),
     ),
     button(
         193,
@@ -19,7 +25,7 @@ BUTTONS = [
         text="Details",
         task="details_page",
         task_args=(),
-        colour=color565(197, 122, 175),
+        colour=color565(255, 255, 255),
     ),
 ]
 

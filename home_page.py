@@ -14,6 +14,7 @@ BUTTONS = [
         text=TEST_PROFILES[row * 2 + col]["label"],
         task="result_page",
         task_args=(TEST_PROFILES[row * 2 + col],),
+        colour=color565(255, 255, 0),
     )
     for row in range(2)
     for col in range(2)
@@ -27,7 +28,7 @@ BUTTONS.extend(
             40,
             text=">>>",
             task="home_page2",
-            colour=color565(197, 122, 175),
+            colour=color565(255, 255, 255),
         ),
     ]
 )

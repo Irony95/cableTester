@@ -11,7 +11,7 @@ BUTTONS = [
         text="Back",
         task="result_page",
         task_args=(),
-        colour=color565(197, 122, 175),
+        colour=color565(255, 255, 255),
     )
 ]
 icons = {True: "tick24x24.raw", False: "cross24x24.raw"}
