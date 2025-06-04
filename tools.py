@@ -30,30 +30,40 @@ def fill_super_ellipse(display: Display, x, y, w, h, colour):
         y_centering = -1
 
     x0, y0 = x + a, y + b
-    min_w = b
+    min_r = b
     x_stretch = 0
     y_stretch = 0
 
     if a > b:
         x_stretch += a - b
     elif a < b:
-        min_w = a
+        min_r = a
         y_stretch += b - a
 
-    x, y = 0, min_w
-    my_elps = ellipse(min_w)
+    x, y = 0, min_r
+    my_elps = ellipse(min_r)
 
-    for i in range(2 * min_w + y_centering + 1):
-        display.draw_hline(
-            x0 - x_stretch, y0 - min_w + i, 2 * x_stretch + x_centering + 1, colour
-        )
+    display.draw_vline(x0, y0 - b, 2 * b + y_centering + 1, colour)
+    display.draw_hline(x0 - a, y0, 2 * a + x_centering + 1, colour)
 
-    for i in range(2 * min_w + x_centering + 1):
+    for i in range(1, x_stretch + 1):
         display.draw_vline(
-            x0 - min_w + i, y0 - y_stretch, 2 * y_stretch + y_centering + 1, colour
+            x0 - i, y0 - min_r, 2 * min_r + y_centering + 1, colour
+        )
+        display.draw_vline(
+            x0 + i, y0 - min_r, 2 * min_r + y_centering + 1, colour
         )
 
-    while min_w > x:
+    # for i in range(2 * min_r + x_centering + 1):
+    for i in range(1, y_stretch + 1):
+        display.draw_hline(
+            x0 - min_r, y0 - i, 2 * min_r + x_centering + 1, colour
+        )
+        display.draw_hline(
+            x0 - min_r, y0 + i, 2 * min_r + x_centering + 1, colour
+        )
+
+    while min_r > x:
         x += 1
         if my_elps(x, y - 0.5) > 1:
             y -= 1
