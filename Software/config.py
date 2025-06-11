@@ -48,7 +48,7 @@ TEST_PROFILES = [
         },
     },
     {
-        "label": "Console",
+        "label": "ETH > RS232",
         "out_to_in_pin_map": {  # out : in
             0: (0,),
             1: (1,),

@@ -45,15 +45,21 @@ def main(display: Display, test_profile: dict):
 
     results = []
     for i in range(8):
-        PIN_OUT_MAP[i].value(1)
+        print("#" * 64)
+        out_pin = PIN_OUT_MAP[i]
+        print(i, out_pin)
+        out_pin.value(1)
         detected = []
         for j in range(8):
-            if PIN_IN_MAP[j].value():
+            in_pin = PIN_IN_MAP[j]
+            print(f"\t{j, in_pin}, {in_pin.value()}")
+            if in_pin.value():
                 detected.append(j)
         is_pass = set(detected) == set(out_to_in_pin_map[i])
+        print(f"\t{detected=}, expected={out_to_in_pin_map[i]}, {is_pass=}")
         results.append(is_pass)
-        print(f"{i} > {str(detected)[1:-1]}: {is_pass}")
-        PIN_OUT_MAP[i].value(0)
+        out_pin.value(0)
+    print("#" * 64)
 
     img_x, img_y = (display.width - 64) // 2, (display.height - 64) // 2
     if sum(results) == 8:
