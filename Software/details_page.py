@@ -36,7 +36,7 @@ def main(display: Display, test_profile: dict, results):
             text_x, text_y = img_x + 24, img_y
             display.draw_image(icon, img_x, img_y, 24, 24)
             if pin_pairing := cable_pin_map[i]:
-                print(f" {','.join(pin_pairing[0])} > {','.join(pin_pairing[1])}")
+                print(f"{result=}, {','.join(pin_pairing[0])} > {','.join(pin_pairing[1])}")
                 display.draw_text(
                     text_x,
                     text_y,
