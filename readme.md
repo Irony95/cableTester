@@ -13,10 +13,9 @@
 12. 3x JST-XH 8P Vertical Male connector + female wire
 13. 1x JST-XH 2P vertical Male Connector + female wire
 14. 8x 0805 330Ω resistor
-15. 8x 0805 1kΩ-10kΩ resistor
-16. 1x Mini360 buck converter
-17. 1x SK12D07 3-pin toggle switch
-18. 1x 1*14P 2.54mm Straight female header
-19. 1x Raspberry Pi Pico
-20. 1x ili9341 Display
+15. 1x Mini360 buck converter
+16. 1x SK12D07 3-pin toggle switch
+17. 1x 1*14P 2.54mm Straight female header
+18. 1x Raspberry Pi Pico
+19. 1x ili9341 Display
 
