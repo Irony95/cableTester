@@ -12,7 +12,7 @@ BUTTONS = [
         156,
         68,
         text=TEST_PROFILES[row * 2 + col]["label"],
-        task="result_page",
+        task="diagram_page",
         task_args=(TEST_PROFILES[row * 2 + col],),
         colour=color565(255, 255, 0),
     )
@@ -22,7 +22,7 @@ BUTTONS = [
 BUTTONS.extend(
     [
         button(
-            193,
+            222,
             200,
             98,
             40,

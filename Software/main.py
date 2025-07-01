@@ -11,6 +11,7 @@ if __name__ == "__main__":
     from pages import pages
 
     def button_checker(x, y):
+        print(f"touch detected at {(x, y)}")
         global lock
         if not lock:
             global display

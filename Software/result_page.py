@@ -4,12 +4,12 @@ from ili9341 import Display, color565
 from tools import draw_header
 
 
-REFRESH = True
-TEST_PROFILE = None
-ARGS = (TEST_PROFILE,)
+# REFRESH = True
+# TEST_PROFILE = None
+# ARGS = (TEST_PROFILE,)
 BUTTONS = [
     button(
-        29,
+        0,
         200,
         98,
         40,
@@ -18,7 +18,17 @@ BUTTONS = [
         colour=color565(255, 255, 255),
     ),
     button(
-        193,
+        111,
+        200,
+        98,
+        40,
+        text="test",
+        task="result_page",
+        task_args=(),
+        colour=color565(255, 255, 0),
+    ),
+    button(
+        222,
         200,
         98,
         40,
@@ -31,9 +41,7 @@ BUTTONS = [
 
 
 def main(display: Display, test_profile: dict):
-    TEST_PROFILE = test_profile
-    TITLE = TEST_PROFILE["label"]
-    out_to_in_pin_map = TEST_PROFILE["out_to_in_pin_map"]
+    TITLE = test_profile["label"]
 
     draw_header(
         display, TITLE, color565(0, 255, 0), color565(0, 0, 0), color565(0, 255, 0)
@@ -43,6 +51,7 @@ def main(display: Display, test_profile: dict):
     # clear value
     [PIN_OUT_MAP[i].value(0) for i in range(8)]
 
+    out_to_in_pin_map = test_profile["out_to_in_pin_map"]
     results = []
     for i in range(8):
         print("#" * 64)
@@ -67,5 +76,7 @@ def main(display: Display, test_profile: dict):
     else:
         display.draw_image("cross64x64.raw", img_x, img_y, 64, 64)
 
-    details_btn = BUTTONS[1]
-    details_btn.task_args = (TEST_PROFILE, results)
+    test_btn = BUTTONS[1]
+    test_btn.task_args = (test_profile,)
+    details_btn = BUTTONS[2]
+    details_btn.task_args = (test_profile, results)

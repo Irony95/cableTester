@@ -4,7 +4,7 @@ from tools import FONT, draw_header
 
 BUTTONS = [
     button(
-        29,
+        0,
         200,
         98,
         40,

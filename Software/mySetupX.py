@@ -27,8 +27,11 @@ def createXPT(touch_handler):
     spiXPT = SPI(1, baudrate=1000000,
                  sck=Pin(XPT_CLK_PIN), mosi=Pin(XPT_MOSI_PIN), miso=Pin(XPT_MISO_PIN))
 
+    # xpt = Touch(spiXPT, cs=Pin(XPT_CS_PIN), int_pin=Pin(XPT_INT),
+    #             int_handler=touch_handler, x_min=219, x_max=1837, y_min=138, y_max=1895,
+    #             width=320, height=240)
     xpt = Touch(spiXPT, cs=Pin(XPT_CS_PIN), int_pin=Pin(XPT_INT),
-                int_handler=touch_handler, x_min=219, x_max=1837, y_min=138, y_max=1895,
+                int_handler=touch_handler, x_min=300, x_max=1807, y_min=210, y_max=1770,
                 width=320, height=240)
 
     return xpt
