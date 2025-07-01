@@ -4,14 +4,14 @@ from xglcd_font import XglcdFont
 
 FONT = XglcdFont("Unispace12x24.c", 12, 24)
 PIN_IN_MAP = {  # read value
-    0: Pin(16, Pin.IN),
-    1: Pin(17, Pin.IN),
-    2: Pin(18, Pin.IN),
-    3: Pin(19, Pin.IN),
-    4: Pin(20, Pin.IN),
-    5: Pin(21, Pin.IN),
-    6: Pin(22, Pin.IN),
-    7: Pin(26, Pin.IN),
+    0: Pin(16, Pin.IN, Pin.PULL_DOWN),
+    1: Pin(17, Pin.IN, Pin.PULL_DOWN),
+    2: Pin(18, Pin.IN, Pin.PULL_DOWN),
+    3: Pin(19, Pin.IN, Pin.PULL_DOWN),
+    4: Pin(20, Pin.IN, Pin.PULL_DOWN),
+    5: Pin(21, Pin.IN, Pin.PULL_DOWN),
+    6: Pin(22, Pin.IN, Pin.PULL_DOWN),
+    7: Pin(26, Pin.IN, Pin.PULL_DOWN),
 }
 PIN_OUT_MAP = {  # set value
     0: Pin(27, Pin.OUT),
