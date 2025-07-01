@@ -22,7 +22,7 @@ BUTTONS = [
         200,
         98,
         40,
-        text="test",
+        text="Test",
         task="result_page",
         task_args=(),
         colour=color565(255, 255, 0),
