@@ -1,8 +1,9 @@
+from time import sleep_ms
+
 from button import button
 from config import PIN_IN_MAP, PIN_OUT_MAP
 from ili9341 import Display, color565
 from tools import draw_header
-
 
 # REFRESH = True
 # TEST_PROFILE = None
@@ -52,12 +53,15 @@ def main(display: Display, test_profile: dict):
     [PIN_OUT_MAP[i].value(0) for i in range(8)]
 
     out_to_in_pin_map = test_profile["out_to_in_pin_map"]
+    pin_delay_ms = 10
     results = []
     for i in range(8):
         print("#" * 64)
         out_pin = PIN_OUT_MAP[i]
         print(i, out_pin)
         out_pin.value(1)
+        sleep_ms(pin_delay_ms)
+
         detected = []
         for j in range(8):
             in_pin = PIN_IN_MAP[j]
@@ -67,7 +71,9 @@ def main(display: Display, test_profile: dict):
         is_pass = set(detected) == set(out_to_in_pin_map[i])
         print(f"\t{detected=}, expected={out_to_in_pin_map[i]}, {is_pass=}")
         results.append(is_pass)
+        
         out_pin.value(0)
+        sleep_ms(pin_delay_ms)
     print("#" * 64)
 
     img_x, img_y = (display.width - 64) // 2, (display.height - 64) // 2
